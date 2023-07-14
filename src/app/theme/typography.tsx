@@ -1,5 +1,5 @@
-const typography = {
-  fontFamily: 'Lora',
+const getTypography = (font: string) => ({
+  fontFamily: font,
   h1: {
     fontWeight: 700,
     fontSize: '4rem',
@@ -30,6 +30,6 @@ const typography = {
     fontSize: '1rem',
     lineHeight: '1.625rem',
   },
-};
+});
 
-export default typography;
+export default getTypography;

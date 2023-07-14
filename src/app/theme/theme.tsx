@@ -10,21 +10,22 @@ import {
 
 import globalStyles from './globalStyles';
 import { darkPalette, lightPalette } from './palettes';
-import typography from './typography';
+import getTypography from './typography';
 
 type ThemeProps = {
+  font: string;
   mode: PaletteMode;
   children: ReactNode;
 };
 
-const createThemeMode = (mode: PaletteMode) =>
+const createThemeMode = (mode: PaletteMode, font: string) =>
   createTheme({
     palette: mode === 'light' ? lightPalette : darkPalette,
-    typography: typography,
+    typography: getTypography(font),
   });
 
-export const Theme = ({ mode, children }: ThemeProps) => (
-  <ThemeProvider theme={createThemeMode(mode)}>
+export const Theme = ({ font, mode, children }: ThemeProps) => (
+  <ThemeProvider theme={createThemeMode(mode, font)}>
     <GlobalStyles styles={globalStyles} />
     <CssBaseline />
     {children}
