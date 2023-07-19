@@ -9,7 +9,7 @@ export function App() {
     <ThemeContextProvider>
       <Theme>
         <AppWrapper>
-          <Stack gap="1.5rem">
+          <Stack gap="1.5rem" paddingBottom="1.5rem">
             <Header />
             <Content />
           </Stack>

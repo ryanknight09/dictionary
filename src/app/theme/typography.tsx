@@ -29,6 +29,7 @@ const getTypography = (font: string) => ({
     fontWeight: 400,
     fontSize: '.875rem',
     lineHeight: 'normal',
+    textTransform: 'none',
   },
 });
 
