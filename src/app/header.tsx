@@ -1,12 +1,23 @@
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import { Box, Button, Menu, MenuItem, Switch, Typography } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
+import NightlightOutlinedIcon from '@mui/icons-material/NightlightOutlined';
+import {
+  Box,
+  Button,
+  Divider,
+  Menu,
+  MenuItem,
+  Switch,
+  styled,
+} from '@mui/material';
 import { useState } from 'react';
 import { ReactComponent as BookIcon } from '../assets/images/logo.svg';
 import { useThemeContext } from './useThemeContext';
 
 export const Header = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const { font, setIsDarkMode, setFont } = useThemeContext();
+  const { font, mode, setIsDarkMode, setFont } = useThemeContext();
   const open = Boolean(anchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -20,18 +31,29 @@ export const Header = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+    <HeaderWrapper>
       <BookIcon />
-      <Box sx={{ display: 'flex' }}>
-        <Button
+      <ContentRight>
+        <FontButton
           onClick={handleClick}
           variant="text"
-          endIcon={<ExpandLessIcon />}
-          sx={{ textTransform: 'none', fontWeight: 700 }}
+          endIcon={
+            open ? (
+              <ExpandMoreIcon color="primary" />
+            ) : (
+              <ExpandLessIcon color="primary" />
+            )
+          }
         >
           {fontMap[font]}
-        </Button>
+        </FontButton>
+        <Divider orientation="vertical" />
         <Switch onChange={() => setIsDarkMode((prevMode) => !prevMode)} />
+        {mode === 'dark' ? (
+          <NightlightOutlinedIcon color="primary" />
+        ) : (
+          <LightModeOutlinedIcon />
+        )}
         <Menu anchorEl={anchorEl} open={open} onClose={() => setAnchorEl(null)}>
           <MenuItem
             onClick={() => setFont('Inter')}
@@ -49,8 +71,25 @@ export const Header = () => {
             Mono
           </MenuItem>
         </Menu>
-      </Box>
-      <Typography>Hello</Typography>
-    </Box>
+      </ContentRight>
+    </HeaderWrapper>
   );
 };
+
+const HeaderWrapper = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+}));
+
+const ContentRight = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  height: '2rem',
+  gap: '.5rem',
+}));
+
+const FontButton = styled(Button)(({ theme }) => ({
+  textTransform: 'none',
+  fontWeight: 700,
+}));

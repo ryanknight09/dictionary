@@ -6,8 +6,7 @@ const lightPalette: PaletteOptions = {
     main: '#A445ED',
   },
   background: {
-    default: '#F4F4F4',
-    paper: '#FFFFFF',
+    default: '#FFFFFF',
   },
   text: {
     primary: '#2D2D2D',

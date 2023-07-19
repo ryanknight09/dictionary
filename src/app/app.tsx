@@ -1,4 +1,5 @@
-import { Container, styled } from '@mui/material';
+import { Container, Stack, styled } from '@mui/material';
+import { Content } from './content';
 import { Header } from './header';
 import Theme from './theme/theme';
 import { ThemeContextProvider } from './useThemeContext';
@@ -8,7 +9,10 @@ export function App() {
     <ThemeContextProvider>
       <Theme>
         <AppWrapper>
-          <Header />
+          <Stack gap="1.5rem">
+            <Header />
+            <Content />
+          </Stack>
         </AppWrapper>
       </Theme>
     </ThemeContextProvider>
