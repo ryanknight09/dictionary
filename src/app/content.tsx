@@ -1,24 +1,23 @@
+import LaunchIcon from '@mui/icons-material/Launch';
 import SearchIcon from '@mui/icons-material/Search';
 import {
   Box,
-  Divider,
   IconButton,
   InputAdornment,
   Link,
-  List,
-  ListItem,
   OutlinedInput,
   Stack,
   Typography,
   styled,
 } from '@mui/material';
 import { ReactComponent as PlayIcon } from '../assets/images/icon-play.svg';
+import { Meaning } from './meaning';
 
 export const Content = () => {
   return (
     <Stack gap="1.75rem">
       <Search />
-      <FlexDisplay>
+      <FlexDisplay sx={{ justifyContent: 'space-between' }}>
         <Stack gap=".5rem">
           <Typography variant="h1" sx={{ fontSize: '2rem' }}>
             Keyboard
@@ -31,7 +30,9 @@ export const Content = () => {
           <PlayIcon style={{ width: '3rem', height: '3rem' }} />
         </IconButton>
       </FlexDisplay>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+
+      <Meaning partOfSpeach={''} definitions={[]} />
+      {/* <Box sx={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
         <Typography variant="body2" sx={{ fontWeight: 700 }}>
           noun
         </Typography>
@@ -150,7 +151,7 @@ export const Content = () => {
           </ListItem>
         </List>
       </Stack>
-      <Divider />
+      <Divider /> */}
       <Stack gap=".5rem">
         <Link
           color="text.secondary"
@@ -161,9 +162,14 @@ export const Content = () => {
         >
           Source
         </Link>
-        <Typography variant="button">
-          https://en.wiktionary.org/wiki/keyboard
-        </Typography>
+        <FlexDisplay gap=".5rem">
+          <Typography variant="button">
+            https://en.wiktionary.org/wiki/keyboard
+          </Typography>
+          <IconButton>
+            <LaunchIcon fontSize="small" />
+          </IconButton>
+        </FlexDisplay>
       </Stack>
     </Stack>
   );
@@ -171,7 +177,6 @@ export const Content = () => {
 
 const FlexDisplay = styled(Box)(({ theme }) => ({
   display: 'flex',
-  justifyContent: 'space-between',
   alignItems: 'center',
 }));
 
