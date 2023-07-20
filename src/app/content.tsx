@@ -7,27 +7,22 @@ import {
   styled,
 } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
 import { SearchResponse } from './apiProvider';
 import { ContentHeading } from './components/contentHeading';
+import { LoadingSkeleton } from './components/loadingSkeleton';
 import { Meaning } from './components/meaning';
 import { SourceContent } from './components/sourceContent';
-import { useDebounce } from './useDebounce';
 import { getFirstNonEmptyAudio } from './utils';
 
-export const Content = () => {
-  const [searchTerm, setSearchTerm] = useState('cat');
-  const debouncedSearch = useDebounce(searchTerm, 500);
-
-  const { isLoading, data } = useQuery<SearchResponse, Error>({
-    queryKey: [debouncedSearch],
+export const Content = ({ searchTerm }: { searchTerm: string }) => {
+  const { isFetching, data } = useQuery<SearchResponse, Error>({
+    queryKey: [searchTerm],
+    keepPreviousData: true,
     onError: (error) => console.log(error),
   });
 
-  if (!data) return 'no data!';
-
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setSearchTerm(event.target.value);
+  if (isFetching) return <LoadingSkeleton />;
+  if (!data) return 'No Data!';
 
   const results = data[0];
   const audioUrl = getFirstNonEmptyAudio(results.phonetics);
@@ -35,13 +30,14 @@ export const Content = () => {
 
   return (
     <Stack gap="1.75rem">
-      <Search value={searchTerm} onChange={handleSearchChange} />
-      <ContentHeading {...results} audioUrl={audioUrl} audio={audio} />
-      {results.meanings.map((meaning) => (
-        <Meaning key={meaning.partOfSpeech} {...meaning} />
-      ))}
-      <Divider />
-      <SourceContent sourceUrl={results.sourceUrls[0]} />
+      <Stack gap="1.75rem">
+        <ContentHeading {...results} audioUrl={audioUrl} audio={audio} />
+        {results.meanings.map((meaning) => (
+          <Meaning key={meaning.partOfSpeech} {...meaning} />
+        ))}
+        <Divider />
+        <SourceContent sourceUrl={results.sourceUrls[0]} />
+      </Stack>
     </Stack>
   );
 };

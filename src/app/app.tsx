@@ -1,7 +1,7 @@
 import { Box, Container, Stack, styled } from '@mui/material';
 import { ApiProvider } from './apiProvider';
-import { Content } from './content';
 import { Header } from './header';
+import { SearchContainer } from './searchContainer';
 import Theme from './theme/theme';
 import { ThemeContextProvider } from './useThemeContext';
 
@@ -14,7 +14,7 @@ export function App() {
             <AppWrapper>
               <Stack gap="1.5rem">
                 <Header />
-                <Content />
+                <SearchContainer />
               </Stack>
             </AppWrapper>
           </Box>
