@@ -25,7 +25,9 @@ export const SourceContent = ({ sourceUrl }: SourceContentProps) => (
       Source
     </Link>
     <FlexDisplay gap=".5rem">
-      <Typography variant="button">{sourceUrl}</Typography>
+      <Typography variant="button" sx={{ textTransform: 'none' }}>
+        {sourceUrl}
+      </Typography>
       <a href={sourceUrl} target="_blank">
         <IconButton>
           <LaunchIcon fontSize="small" />
