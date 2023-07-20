@@ -10,7 +10,7 @@ export function App() {
     <ThemeContextProvider>
       <Theme>
         <ApiProvider>
-          <Box sx={{ width: '100vw', height: '100vh' }}>
+          <Box sx={{ height: '100vh' }}>
             <AppWrapper>
               <Stack gap="1.5rem">
                 <Header />

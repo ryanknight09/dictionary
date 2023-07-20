@@ -23,7 +23,7 @@ export const Meaning = ({
     </SectionWrapper>
     <Stack>
       <MeaningText variant="body2">Meaning</MeaningText>
-      <List disablePadding sx={{ listStyleType: 'disc', pl: 2.25 }}>
+      <List disablePadding sx={{ listStyleType: 'disc', pl: 2.75 }}>
         {definitions.map((item, index) => (
           <ListItem
             key={`${partOfSpeech}-${index}`}

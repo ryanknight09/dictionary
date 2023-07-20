@@ -30,14 +30,12 @@ export const Content = ({ searchTerm }: { searchTerm: string }) => {
 
   return (
     <Stack gap="1.75rem">
-      <Stack gap="1.75rem">
-        <ContentHeading {...results} audioUrl={audioUrl} audio={audio} />
-        {results.meanings.map((meaning) => (
-          <Meaning key={meaning.partOfSpeech} {...meaning} />
-        ))}
-        <Divider />
-        <SourceContent sourceUrl={results.sourceUrls[0]} />
-      </Stack>
+      <ContentHeading {...results} audioUrl={audioUrl} audio={audio} />
+      {results.meanings.map((meaning) => (
+        <Meaning key={meaning.partOfSpeech} {...meaning} />
+      ))}
+      <Divider />
+      <SourceContent sourceUrl={results.sourceUrls[0]} />
     </Stack>
   );
 };
