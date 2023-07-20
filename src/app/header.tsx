@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import { ReactComponent as BookIcon } from '../assets/images/logo.svg';
+import type { FontOptions } from './useThemeContext';
 import { useThemeContext } from './useThemeContext';
 
 export const Header = () => {
@@ -22,6 +23,11 @@ export const Header = () => {
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const onMenuItemClick = (fontType: FontOptions) => {
+    setFont(fontType);
+    setAnchorEl(null);
   };
 
   const fontMap: { [key: string]: string } = {
@@ -56,16 +62,19 @@ export const Header = () => {
         )}
         <Menu anchorEl={anchorEl} open={open} onClose={() => setAnchorEl(null)}>
           <MenuItem
-            onClick={() => setFont('Inter')}
+            onClick={() => onMenuItemClick('Inter')}
             sx={{ fontFamily: 'Inter' }}
           >
             Sans
           </MenuItem>
-          <MenuItem onClick={() => setFont('Lora')} sx={{ fontFamily: 'Lora' }}>
+          <MenuItem
+            onClick={() => onMenuItemClick('Lora')}
+            sx={{ fontFamily: 'Lora' }}
+          >
             Serif
           </MenuItem>
           <MenuItem
-            onClick={() => setFont('Inconsolata')}
+            onClick={() => onMenuItemClick('Inconsolata')}
             sx={{ fontFamily: 'Inconsolata' }}
           >
             Mono
