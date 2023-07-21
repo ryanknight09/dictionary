@@ -11,6 +11,7 @@ import { SearchResponse } from './apiProvider';
 import { ContentHeading } from './components/contentHeading';
 import { LoadingSkeleton } from './components/loadingSkeleton';
 import { Meaning } from './components/meaning';
+import { NoDefinitionsFound } from './components/noDefinitionsFound';
 import { SourceContent } from './components/sourceContent';
 import { getFirstNonEmptyAudio } from './utils';
 
@@ -18,11 +19,10 @@ export const Content = ({ searchTerm }: { searchTerm: string }) => {
   const { isFetching, data } = useQuery<SearchResponse, Error>({
     queryKey: [searchTerm],
     keepPreviousData: true,
-    onError: (error) => console.log(error),
   });
 
   if (isFetching) return <LoadingSkeleton />;
-  if (!data) return 'No Data!';
+  if (!data) return <NoDefinitionsFound />;
 
   const results = data[0];
   const audioUrl = getFirstNonEmptyAudio(results.phonetics);
